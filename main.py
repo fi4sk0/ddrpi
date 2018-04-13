@@ -54,7 +54,12 @@ KEY_LEFT = 80
 KEY_DOWN = 81
 KEY_UP = 82
 
-KEY_PINS = [KEY_RIGHT, KEY_LEFT, KEY_DOWN, KEY_UP]
+PIN_KEY_MAPPING = {
+    7: KEY_RIGHT,
+    8: KEY_LEFT,
+    9: KEY_DOWN,
+    10: KEY_UP
+}
 
 def write_keys(keys):
 
@@ -77,8 +82,8 @@ while True:
         # means the pin is being touched, and 0 means it is not being touched.
         pin_bit = 1 << i
 
-        if (current_touched & pin_bit and i < 4):
-            pressedKeys.append(KEY_PINS[i])
+        if (current_touched & pin_bit and i in PIN_KEY_MAPPING):
+            pressedKeys.append(PIN_KEY_MAPPING[i])
             
         # First check if transitioned from not touched to touched.
         if current_touched & pin_bit and not last_touched & pin_bit:
